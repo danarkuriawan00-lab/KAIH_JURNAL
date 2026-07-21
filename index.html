@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jurnal Harian 7 KAIH - SDN Gondang 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    body { 
+      background-color: #f1f5f9;
+      padding: 20px 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      overflow: hidden;
+      padding-bottom: 24px;
+    }
+
+    /* Banner Header dengan Gambar Background & Overlay Transparan */
+    .header-banner {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgK5vfsgyASyBeGPvvvBX3Gnqad4NzvQUFrCp1RQ7ERAdj_fcJKbZXoic123RJtQrITTA3kAxoBvpi0z8AI6EXODMv1NuMQSkRtJTyQxG7yvDNnNhJ-2p3F7LcCT7NBQbt2zQ3_-4RdVtDnCplvcig88u9ju75YRUM2Qf0s6syMoD3VnWFIE_-825sCZNTs/w452-h640/Screenshot%202026-07-21%20215051.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 16px;
+    }
+
+    /* Overlay Efek Blur/Redup Segar */
+    .header-banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(2px);
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-sd {
+      width: 60px;
+      height: auto;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .school-name {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #93c5fd;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .main-title {
+      font-size: 22px;
+      font-weight: 800;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .sub-title {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    /* Styling Running Text / Teks Berjalan */
+    .running-text-container {
+      background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 8px 0;
+      font-size: 13px;
+      font-weight: 700;
+      overflow: hidden;
+      white-space: nowrap;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .running-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 16s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+
+    /* Form Content */
+    .form-body {
+      padding: 24px 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="date"], input[type="time"], textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #1e293b;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 20px 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Habit Item Card */
+    .habit-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      background: #ffffff;
+      transition: border-color 0.2s;
+    }
+
+    .habit-item:hover {
+      border-color: #cbd5e1;
+    }
+
+    .habit-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .habit-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .habit-icon {
+      width: 38px;
+      height: 38px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .habit-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .habit-sub {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    /* Switch Custom Toggle */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1;
+      transition: .2s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider { background-color: #2563eb; }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    /* Detail Tambahan Saat Toggle Diaktifkan */
+    .habit-details {
+      display: none;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    .habit-details.active { display: block; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .detail-grid label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+    input[type="file"] { font-size: 11px; color: #64748b; }
+
+    /* Tombol Kirim Utama */
+    .btn-submit {
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover { background: #1d4ed8; }
+    .btn-submit:active { transform: scale(0.99); }
+
+    .status-msg {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .grid-2, .detail-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Banner Foto Sekolah -->
+    <div class="header-banner">
+      <div class="header-content">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUAgnz3M-C0b4aP4NCccOVpRTBjimetBgZhyphenhyphenkGcMIcG3YY7RhacnjOZFFonylLQGbQ0LQHR7n4cOk7XN8mDb9YmRrXgJi5q7yZCEEKpQ4CYuB9WaZLCNw35_qVPvcRTizOMvZXsYVqmAOSfxDv9bUmpB9z_-2G3ecR_C1CONgsQ5-5U5NA2B9rpU4zfJnZ/w200-h200/sdn%20gng%201.png" alt="Logo SDN Gondang 1" class="logo-sd">
+        <div class="school-name">SDN GONDANG 1</div>
+        <div class="main-title">Jurnal Harian 7KAIH</div>
+        <div class="sub-title">7 Kebiasaan Anak Indonesia Hebat (Foto & Detail Jam)</div>
+      </div>
+    </div>
+
+    <!-- Running Text Teks Berjalan -->
+    <div class="running-text-container">
+      <div class="running-text">
+        ✨ Dari Kebiasaan Baik, Lahir Generasi Hebat! Mari Sukseskan Gerakan 7 Kebiasaan Anak Indonesia Hebat 🚀
+      </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="form-body">
+      <form id="jurnalForm">
+        
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="nama">Nama Lengkap Siswa</label>
+            <input type="text" id="nama" placeholder="Contoh: Ahmad Raihan" required>
+          </div>
+          <div class="form-group">
+            <label for="kelas">Kelas / Absen</label>
+            <input type="text" id="kelas" placeholder="Contoh: 5A / 04" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tanggal">Tanggal Pengisian</label>
+          <input type="date" id="tanggal" required>
+        </div>
+
+        <div class="section-label">
+          📋 Checklist & Detail Kegiatan Hari Ini:
+        </div>
+
+        <!-- 1. Bangun Pagi -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">🌅</div>
+              <div>
+                <div class="habit-title">1. Bangun Pagi</div>
+                <div class="habit-sub">Bangun pagi tepat waktu</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k1" onchange="toggleDetails('d1', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d1">
+            <div class="detail-grid">
+              <div>
+                <label for="jam_bangun">⏰ Jam Bangun:</label>
+                <input type="time" id="jam_bangun">
+              </div>
+              <div>
+                <label for="foto_k1">📸 Foto Bangun/Kasur:</label>
+                <input type="file" id="foto_k1" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Beribadah -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">🤲</div>
+              <div>
+                <div class="habit-title">2. Beribadah</div>
+                <div class="habit-sub">Ibadah tepat waktu</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k2" onchange="toggleDetails('d2', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d2">
+            <div class="detail-grid">
+              <div>
+                <label for="ket_k2">📝 Keterangan Ibadah:</label>
+                <input type="text" id="ket_k2" placeholder="Contoh: Shalat Subuh">
+              </div>
+              <div>
+                <label for="foto_k2">📸 Foto Kegiatan Ibadah:</label>
+                <input type="file" id="foto_k2" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Berolahraga -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">🏃</div>
+              <div>
+                <div class="habit-title">3. Berolahraga</div>
+                <div class="habit-sub">Aktivitas fisik 15-30 menit</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k3" onchange="toggleDetails('d3', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d3">
+            <div class="detail-grid">
+              <div>
+                <label for="ket_k3">📝 Jenis Olahraga:</label>
+                <input type="text" id="ket_k3" placeholder="Contoh: Jogging / Senam">
+              </div>
+              <div>
+                <label for="foto_k3">📸 Foto Olahraga:</label>
+                <input type="file" id="foto_k3" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Makan Sehat & Bergizi -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">🥗</div>
+              <div>
+                <div class="habit-title">4. Makan Sehat & Bergizi</div>
+                <div class="habit-sub">Makanan bergizi seimbang</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k4" onchange="toggleDetails('d4', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d4">
+            <div class="detail-grid">
+              <div>
+                <label for="ket_k4">📝 Menu Makanan:</label>
+                <input type="text" id="ket_k4" placeholder="Contoh: Nasi, Sayur, Telur">
+              </div>
+              <div>
+                <label for="foto_k4">📸 Foto Makanan:</label>
+                <input type="file" id="foto_k4" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Gemar Membaca / Belajar -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">📚</div>
+              <div>
+                <div class="habit-title">5. Gemar Membaca / Belajar</div>
+                <div class="habit-sub">Membaca atau belajar mandiri</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k5" onchange="toggleDetails('d5', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d5">
+            <div class="detail-grid">
+              <div>
+                <label for="ket_k5">📝 Judul Buku / Pelajaran:</label>
+                <input type="text" id="ket_k5" placeholder="Contoh: Matematika bab 2">
+              </div>
+              <div>
+                <label for="foto_k5">📸 Foto Saat Belajar:</label>
+                <input type="file" id="foto_k5" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Bermasyarakat -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">🤝</div>
+              <div>
+                <div class="habit-title">6. Bermasyarakat</div>
+                <div class="habit-sub">Membantu orang tua / kegiatan sosial</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k6" onchange="toggleDetails('d6', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d6">
+            <div class="detail-grid">
+              <div>
+                <label for="ket_k6">📝 Kegiatan:</label>
+                <input type="text" id="ket_k6" placeholder="Contoh: Menyapu halaman">
+              </div>
+              <div>
+                <label for="foto_k6">📸 Foto Kegiatan:</label>
+                <input type="file" id="foto_k6" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Istirahat Cukup (Tidur Cepat) -->
+        <div class="habit-item">
+          <div class="habit-header">
+            <div class="habit-info">
+              <div class="habit-icon">🌙</div>
+              <div>
+                <div class="habit-title">7. Istirahat Cukup (Tidur Cepat)</div>
+                <div class="habit-sub">Tidur malam tidak larut</div>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="k7" onchange="toggleDetails('d7', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="habit-details" id="d7">
+            <div class="detail-grid">
+              <div>
+                <label for="jam_tidur">⏰ Rencana Jam Tidur:</label>
+                <input type="time" id="jam_tidur">
+              </div>
+              <div>
+                <label for="foto_k7">📸 Foto Persiapan Tidur:</label>
+                <input type="file" id="foto_k7" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 16px;">
+          <label for="catatan">Refleksi / Catatan Singkat Hari Ini</label>
+          <textarea id="catatan" rows="3" placeholder="Tuliskan pengalaman atau rasa syukurmu hari ini..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmit">📌 Kirim Jurnal & Foto ke Spreadsheet</button>
+        <div id="statusMsg" class="status-msg"></div>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('tanggal').valueAsDate = new Date();
+
+    function toggleDetails(id, show) {
+      const el = document.getElementById(id);
+      if (show) el.classList.add('active');
+      else el.classList.remove('active');
+    }
+
+    // Fungsi Kompres Gambar Super Cepat
+    function processAndCompressFile(fileInput) {
+      return new Promise((resolve) => {
+        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+          resolve("");
+          return;
+        }
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            const MAX_WIDTH = 300; 
+            
+            if (width > MAX_WIDTH) {
+              height = Math.round((height * MAX_WIDTH) / width);
+              width = MAX_WIDTH;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const base64Compressed = canvas.toDataURL('image/jpeg', 0.20);
+            resolve(base64Compressed);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsrm_PVkG9hDVG3jTGHKujcbusur5_In9uNrD4XhbbMtSV5_Acr3aTTRg7N2Kq6xhsoQ/exec";
+
+    const form = document.getElementById('jurnalForm');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const statusMsg = document.getElementById('statusMsg');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = "⏳ Mengirim Data & Foto...";
+
+      const [fotoK1, fotoK2, fotoK3, fotoK4, fotoK5, fotoK6, fotoK7] = await Promise.all([
+        processAndCompressFile(document.getElementById('foto_k1')),
+        processAndCompressFile(document.getElementById('foto_k2')),
+        processAndCompressFile(document.getElementById('foto_k3')),
+        processAndCompressFile(document.getElementById('foto_k4')),
+        processAndCompressFile(document.getElementById('foto_k5')),
+        processAndCompressFile(document.getElementById('foto_k6')),
+        processAndCompressFile(document.getElementById('foto_k7'))
+      ]);
+
+      const formData = {
+        timestamp: new Date().toLocaleString("id-ID"),
+        nama: document.getElementById('nama').value,
+        kelas: document.getElementById('kelas').value,
+        tanggal: document.getElementById('tanggal').value,
+        
+        k1_status: document.getElementById('k1').checked ? "Ya" : "Tidak",
+        k1_jam: document.getElementById('jam_bangun').value || "-",
+        k1_foto: fotoK1,
+
+        k2_status: document.getElementById('k2').checked ? "Ya" : "Tidak",
+        k2_ket: document.getElementById('ket_k2').value || "-",
+        k2_foto: fotoK2,
+
+        k3_status: document.getElementById('k3').checked ? "Ya" : "Tidak",
+        k3_ket: document.getElementById('ket_k3').value || "-",
+        k3_foto: fotoK3,
+
+        k4_status: document.getElementById('k4').checked ? "Ya" : "Tidak",
+        k4_ket: document.getElementById('ket_k4').value || "-",
+        k4_foto: fotoK4,
+
+        k5_status: document.getElementById('k5').checked ? "Ya" : "Tidak",
+        k5_ket: document.getElementById('ket_k5').value || "-",
+        k5_foto: fotoK5,
+
+        k6_status: document.getElementById('k6').checked ? "Ya" : "Tidak",
+        k6_ket: document.getElementById('ket_k6').value || "-",
+        k6_foto: fotoK6,
+
+        k7_status: document.getElementById('k7').checked ? "Ya" : "Tidak",
+        k7_jam: document.getElementById('jam_tidur').value || "-",
+        k7_foto: fotoK7,
+
+        catatan: document.getElementById('catatan').value || "-"
+      };
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(formData)
+      });
+
+      setTimeout(() => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = "📌 Kirim Jurnal & Foto ke Spreadsheet";
+        statusMsg.style.display = "block";
+        statusMsg.style.background = "#dcfce7";
+        statusMsg.style.color = "#166534";
+        statusMsg.style.border = "1px solid #86efac";
+        statusMsg.innerText = "✅ Jurnal harian berhasil terkirim!";
+        form.reset();
+        document.getElementById('tanggal').valueAsDate = new Date();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
